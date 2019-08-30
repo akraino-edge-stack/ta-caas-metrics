@@ -15,8 +15,9 @@
 %define COMPONENT metrics_server
 %define RPM_NAME caas-%{COMPONENT}
 %define RPM_MAJOR_VERSION 0.3.3
-%define RPM_MINOR_VERSION 1
-%define DEPENDENCY_MANAGER_VERSION 0.5.0
+%define RPM_MINOR_VERSION 2
+%define go_version 1.12.9
+%define DEP_MAN_VERSION 0.5.0
 %define IMAGE_TAG %{RPM_MAJOR_VERSION}-%{RPM_MINOR_VERSION}
 
 Name:           %{RPM_NAME}
@@ -49,8 +50,9 @@ docker build \
   --build-arg http_proxy="${http_proxy}" \
   --build-arg https_proxy="${https_proxy}" \
   --build-arg no_proxy="${no_proxy}" \
-  --build-arg METRICS_SERVER="%{RPM_MAJOR_VERSION}" \
-  --build-arg DEPENDENCY_MANAGER="%{DEPENDENCY_MANAGER_VERSION}" \
+  --build-arg METRICS_SERVER_VERSION="%{RPM_MAJOR_VERSION}" \
+  --build-arg DEP_MAN_VERSION="%{DEP_MAN_VERSION}" \
+  --build-arg go_version="%{go_version}" \
   --tag %{COMPONENT}:%{IMAGE_TAG} \
   %{_builddir}/%{RPM_NAME}-%{RPM_MAJOR_VERSION}/docker-build/%{COMPONENT}/
 
