@@ -15,7 +15,7 @@
 %define COMPONENT custom_metrics
 %define RPM_NAME caas-%{COMPONENT}
 %define RPM_MAJOR_VERSION 0.5.0
-%define RPM_MINOR_VERSION 1
+%define RPM_MINOR_VERSION 2
 %define DEPENDENCY_MANAGER_VERSION 0.5.0
 %define IMAGE_TAG %{RPM_MAJOR_VERSION}-%{RPM_MINOR_VERSION}
 
@@ -23,7 +23,7 @@ Name:           %{RPM_NAME}
 Version:        %{RPM_MAJOR_VERSION}
 Release:        %{RPM_MINOR_VERSION}%{?dist}
 Summary:        Containers as a Service Custom Metrics component
-License:        %{_platform_license} and Apache License
+License:        %{_platform_license} andi Commercial and Apache License
 URL:            https://github.com/DirectXMan12/k8s-prometheus-adapter
 BuildArch:      x86_64
 Vendor:         %{_platform_vendor} and DirectXMan12/k8s-prometheus-adapter unmodified
