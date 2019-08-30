@@ -15,12 +15,17 @@
 FROM alpine:3.9
 MAINTAINER Szekeres Balazs <balazs.szekeres@nokia.com>
 
-ARG CUSTOM_METRICS
-ENV CUSTOM_METRICS_VERSION=$CUSTOM_METRICS
+ARG CUSTOM_METRICS_VERSION
+ARG go_install_dir="/usr/local/go"
+ARG go_version
 ENV GOPATH /build
 ENV PATH /usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-RUN apk add --no-cache --virtual .build-deps build-base go godep curl tar git glide mercurial \
+RUN apk add --no-cache --virtual .build-deps build-base go godep curl tar git glide mercurial bash \
+&&  mkdir -p $go_install_dir \
+&&  curl -fsSL -k https://dl.google.com/go/go${go_version}.src.tar.gz | tar zx --strip-components=1 -C ${go_install_dir} \
+&&  cd ${go_install_dir}/src/ \
+&&  ./make.bash \
 && mkdir -p ${GOPATH}/src/github.com/directxman12/k8s-prometheus-adapter \
 && curl -fsSL -k https://github.com/DirectXMan12/k8s-prometheus-adapter/archive/v${CUSTOM_METRICS_VERSION}.tar.gz | tar zx --strip-components=1 -C ${GOPATH}/src/github.com/directxman12/k8s-prometheus-adapter \
 && cd ${GOPATH}/src/github.com/directxman12/k8s-prometheus-adapter \

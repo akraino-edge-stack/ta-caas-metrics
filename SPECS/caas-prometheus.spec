@@ -15,8 +15,8 @@
 %define COMPONENT prometheus
 %define RPM_NAME caas-%{COMPONENT}
 %define RPM_MAJOR_VERSION 2.11.1
-%define RPM_MINOR_VERSION 0
-%define GO_VERSION 1.12.1
+%define RPM_MINOR_VERSION 1
+%define go_version 1.12.9
 %define IMAGE_TAG %{RPM_MAJOR_VERSION}-%{RPM_MINOR_VERSION}
 
 Name:           %{RPM_NAME}
@@ -49,8 +49,8 @@ docker build \
   --build-arg http_proxy="${http_proxy}" \
   --build-arg https_proxy="${https_proxy}" \
   --build-arg no_proxy="${no_proxy}" \
-  --build-arg PROMETHEUS="%{RPM_MAJOR_VERSION}" \
-  --build-arg GO_REQUIRED="%{GO_VERSION}" \
+  --build-arg PROMETHEUS_VERSION="%{RPM_MAJOR_VERSION}" \
+  --build-arg go_version="%{go_version}" \
   --tag %{COMPONENT}:%{IMAGE_TAG} \
   %{_builddir}/%{RPM_NAME}-%{RPM_MAJOR_VERSION}/docker-build/%{COMPONENT}/
 
