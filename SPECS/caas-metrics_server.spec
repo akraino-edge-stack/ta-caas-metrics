@@ -15,9 +15,9 @@
 %define COMPONENT metrics_server
 %define RPM_NAME caas-%{COMPONENT}
 %define RPM_MAJOR_VERSION 0.3.3
-%define RPM_MINOR_VERSION 2
+%define RPM_MINOR_VERSION 3
 %define go_version 1.12.9
-%define DEP_MAN_VERSION 0.5.0
+%define DEP_MAN_VERSION 0.5.4
 %define IMAGE_TAG %{RPM_MAJOR_VERSION}-%{RPM_MINOR_VERSION}
 
 Name:           %{RPM_NAME}
@@ -26,7 +26,7 @@ Release:        %{RPM_MINOR_VERSION}%{?dist}
 Summary:        Containers as a Service Metrics Server component
 License:        %{_platform_license} and MIT license and BSD and Apache License and GNU LGPLv3
 URL:            https://github.com/kubernetes-incubator/metrics-server
-BuildArch:      x86_64
+BuildArch:      %{_arch}
 Vendor:         %{_platform_vendor} and kubernetes-incubator/metrics-server unmodified
 Source0:        %{name}-%{version}.tar.gz
 
