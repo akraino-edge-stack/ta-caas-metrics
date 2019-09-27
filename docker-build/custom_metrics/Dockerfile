@@ -29,8 +29,9 @@ RUN apk add --no-cache --virtual .build-deps build-base go godep curl tar git gl
 && mkdir -p ${GOPATH}/src/github.com/directxman12/k8s-prometheus-adapter \
 && curl -fsSL -k https://github.com/DirectXMan12/k8s-prometheus-adapter/archive/v${CUSTOM_METRICS_VERSION}.tar.gz | tar zx --strip-components=1 -C ${GOPATH}/src/github.com/directxman12/k8s-prometheus-adapter \
 && cd ${GOPATH}/src/github.com/directxman12/k8s-prometheus-adapter \
-&& make all \
-&& mv _output/amd64/adapter /adapter \
+&& if [ $(uname -m) == 'aarch64' ]; then HOST_ARCH=arm64; else HOST_ARCH=amd64; fi \
+&& make all ARCH=${HOST_ARCH} \
+&& mv _output/${HOST_ARCH}/adapter /adapter \
 && chmod +x /adapter \
 && apk del .build-deps \
 && rm -rf ${GOPATH} \

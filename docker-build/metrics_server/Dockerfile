@@ -29,7 +29,8 @@ RUN apk add --no-cache --virtual .build-deps build-base go godep curl tar git ba
 &&  curl -fsSL -k https://dl.google.com/go/go${go_version}.src.tar.gz | tar zx --strip-components=1 -C ${go_install_dir} \
 &&  cd ${go_install_dir}/src/ \
 &&  ./make.bash \
-&&  curl -fsSL -o /usr/local/bin/dep https://github.com/golang/dep/releases/download/v${DEP_MAN_VERSION}/dep-linux-amd64 \
+&&  if [ $(uname -m) == 'aarch64' ]; then HOST_ARCH=arm64; else HOST_ARCH=amd64; fi \
+&&  curl -fsSL -o /usr/local/bin/dep https://github.com/golang/dep/releases/download/v${DEP_MAN_VERSION}/dep-linux-${HOST_ARCH} \
 &&  chmod +x /usr/local/bin/dep \
 &&  mkdir -p ${GOPATH}/src/github.com/kubernetes-incubator/metrics-server/ \
 &&  curl -fsSL -k https://github.com/kubernetes-incubator/metrics-server/archive/v${METRICS_SERVER_VERSION}.tar.gz | tar zx --strip-components=1 -C ${GOPATH}/src/github.com/kubernetes-incubator/metrics-server/ \
@@ -37,8 +38,8 @@ RUN apk add --no-cache --virtual .build-deps build-base go godep curl tar git ba
 &&  dep ensure --vendor-only \
 # static linking added
 &&  sed -i "s?LDFLAGS=-w \$(VERSION_LDFLAGS)?LDFLAGS='-extldflags "-static"' -w \$(VERSION_LDFLAGS)?" ./Makefile \
-&&  make \
-&&  mv ./_output/amd64/metrics-server /metrics-server \
+&&  make ARCH=${HOST_ARCH} \
+&&  mv ./_output/${HOST_ARCH}/metrics-server /metrics-server \
 &&  apk del .build-deps \
 &&  rm -rf ${GOPATH} \
 &&  rm -rf $go_install_dir \
