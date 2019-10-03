@@ -31,6 +31,7 @@ RUN apk add --no-cache --virtual .build-deps build-base go godep curl tar git ba
 &&  make build \
 &&  mv prometheus /bin/prometheus \
 &&  mv promtool /bin/promtool \
+&&  mv tsdb/tsdb /bin/tsdb \
 &&  apk del .build-deps \
 &&  rm -rf /build \
 &&  rm -rf ${GOPATH} \
