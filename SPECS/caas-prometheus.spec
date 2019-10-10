@@ -15,8 +15,8 @@
 %define COMPONENT prometheus
 %define RPM_NAME caas-%{COMPONENT}
 %define RPM_MAJOR_VERSION 2.11.1
-%define RPM_MINOR_VERSION 2
-%define go_version 1.12.9
+%define RPM_MINOR_VERSION 3
+%define go_version 1.12.10
 %define IMAGE_TAG %{RPM_MAJOR_VERSION}-%{RPM_MINOR_VERSION}
 
 Name:           %{RPM_NAME}
