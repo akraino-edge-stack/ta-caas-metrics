@@ -14,8 +14,8 @@
 
 %define COMPONENT metrics_server
 %define RPM_NAME caas-%{COMPONENT}
-%define RPM_MAJOR_VERSION 0.3.3
-%define RPM_MINOR_VERSION 4
+%define RPM_MAJOR_VERSION 0.3.6
+%define RPM_MINOR_VERSION 0
 %define go_version 1.12.10
 %define DEP_MAN_VERSION 0.5.4
 %define IMAGE_TAG %{RPM_MAJOR_VERSION}-%{RPM_MINOR_VERSION}
